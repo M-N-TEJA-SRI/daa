@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> minmax(int a[], int l, int h) {
+    if (l == h)
+        return {a[l], a[l]};  // Only one element, so both min and max are the same
+    else if (l == h - 1) {  // Two elements
+        if (a[l] > a[h])
+            return {a[h], a[l]};
+        else
+            return {a[l], a[h]};
+    } else {  // More than two elements
+        int mid = (l + h) / 2;
+        vector<int> left = minmax(a, l, mid);
+        vector<int> right = minmax(a, mid + 1, h);
+
+        int minVal = (left[0] < right[0]) ? left[0] : right[0];
+        int maxVal = (left[1] > right[1]) ? left[1] : right[1];
+
+        return {minVal, maxVal};
+    }
+}
+
+int main() {
+    int n;
+    cin >> n;
+    int a[n];
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+
+    vector<int> result = minmax(a, 0, n - 1);
+    cout << "Minimum: " << result[0] << endl;
+    cout << "Maximum: " << result[1] << endl;
+
+    return 0;
+}
+output
+4
+9 1 2 89
+Minimum: 1
+Maximum: 89
