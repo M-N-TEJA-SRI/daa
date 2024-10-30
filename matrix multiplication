@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, m;
+    cin >> n >> m;  // Input dimensions n and m
+    
+    int a[n][m], b[m][n], c[n][n] = {0};  // Initialize c with zeros
+
+    // Input matrix a of size n x m
+    for (int i = 0; i < n; i++) { 
+        for (int j = 0; j < m; j++) {
+            cin >> a[i][j];
+        }
+    }
+
+    // Input matrix b of size m x n
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> b[i][j];
+        }
+    }
+
+    // Perform matrix multiplication to get c of size n x n
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            c[i][j] = 0;
+            for (int k = 0; k < m; k++) {
+                c[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
+
+    // Output the result matrix c
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << c[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+output
+2 2
+1 0 0 1
+1 2 3 4
+1 2 
+3 4 
